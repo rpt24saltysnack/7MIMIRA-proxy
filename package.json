@@ -1,0 +1,28 @@
+{
+  "name": "7mimira-proxy",
+  "version": "1.0.0",
+  "description": "Proxy server that displays the various services needed to render a somebirds shoe product page",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "server-dev": "nodemon ./server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rpt24saltysnack/7MIMIRA-proxy.git"
+  },
+  "author": "7MIMIRA",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rpt24saltysnack/7MIMIRA-proxy/issues"
+  },
+  "homepage": "https://github.com/rpt24saltysnack/7MIMIRA-proxy#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
