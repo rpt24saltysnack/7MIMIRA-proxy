@@ -1,0 +1,15 @@
+.body-container{
+  display: flex;
+}
+
+.main{
+  display: inline-block;
+  width: 67%;
+  /* background-color: blue; */
+}
+
+.sidebar{
+  display: inline-block;
+  width: 33%;
+  /* background-color: gray; */
+}
