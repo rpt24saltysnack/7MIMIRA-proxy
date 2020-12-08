@@ -2,11 +2,24 @@ const express = require('express');
 const axios = require('axios');
 const HOST = 'localhost';
 const PORT = 3000;
-
+const path = require('path');
 const app = express();
 
 app.use(express.static('public'));
 
+app.get('/bundles', (req, res) => {
+  async function retrieveBundles() {
+    try {
+      let colorAndSizeSelectionComponent = await axios.get('http://localhost:3001/bundle.js');
+      let summaryComponent = await axios.get('http://localhost:3002/bundle.js');
+      res.send(`${summaryComponent.data}${colorAndSizeSelectionComponent.data}`);
+    } catch (error) {
+      console.error(error);
+      res.end()
+    }
+  }
+  retrieveBundles();
+});
 
 //color & size selection routes
 app.get('/shoes/:shoeId/colors', (req, res) => {
@@ -58,6 +71,6 @@ app.get('/products/:shoeId/summary', (req, res) => {
   })
 })
 
-app.listen(PORT, HOST, () => {
+app.listen(PORT, () => {
   console.log(`listening on ${HOST}:${PORT}`);
 })
