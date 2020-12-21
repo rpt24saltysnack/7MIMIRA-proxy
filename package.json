@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "test",
-    "start": "nodemon ./server/index.js"
+    "start": "nodemon ./server/index.js",
+    "build": "webpack -w",
+    "upload": "node ./deployment_utils/s3_upload.js somebirds-static-assets ./public/bundle.js"
   },
   "repository": {
     "type": "git",
@@ -25,7 +27,16 @@
     "react-dom": "^17.0.1"
   },
   "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-react": "^7.12.10",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.0.1",
     "dotenv": "^8.2.0",
-    "nodemon": "^2.0.6"
+    "nodemon": "^2.0.6",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.11.0",
+    "webpack-cli": "^4.2.0"
   }
 }
