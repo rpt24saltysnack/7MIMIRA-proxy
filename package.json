@@ -6,7 +6,7 @@
   "scripts": {
     "test": "test",
     "start": "nodemon ./server/index.js",
-    "build": "webpack -w",
+    "build": "webpack",
     "upload": "node ./deployment_utils/s3_upload.js somebirds-static-assets ./public/bundle.js"
   },
   "repository": {
