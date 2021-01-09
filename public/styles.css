@@ -1,16 +1,32 @@
-.body-container{
-  display: flex;
-  padding: 10px 40px 0px 40px;
+.body-container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1160px;
+  width:90%;
 }
 
-.main{
+.main-container {
+  display: flex;
+}
+
+.main {
   display: inline-block;
   width: 67%;
   /* background-color: blue; */
 }
 
-.sidebar{
+.sidebar {
   display: inline-block;
   width: 33%;
   /* background-color: gray; */
+}
+
+.footer-container {
+  padding-top: 70px;
+  display: flex;
+}
+
+.footer-main {
+  display: inline-block;
+  width: 100%;
 }

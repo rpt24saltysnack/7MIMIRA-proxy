@@ -6,6 +6,7 @@ const PORT = 3000;
 
 const colorAndSizeSelectionHost = process.env.DEV_COLOR_HOST || 'http://3.18.69.132:3001';
 const summaryHost = process.env.DEV_SUMMARY_HOST || 'http://54.241.116.3:3002';
+const reviewsHost = process.env.DEV_REVIEWS_HOST || 'http://3.18.69.132:3003';;
 
 app.use(express.static('public'));
 
@@ -14,10 +15,11 @@ app.get('/bundles', (req, res) => {
     try {
       let colorAndSizeSelectionComponent = await axios.get(`${colorAndSizeSelectionHost}/bundle.js`);
       let summaryComponent = await axios.get(`${summaryHost}/bundle.js`);
-      res.send(`${summaryComponent.data}${colorAndSizeSelectionComponent.data}`);
+      let reviewsComponent = await axios.get(`${reviewsHost}/bundle.js`);
+      res.send(`${summaryComponent.data}${colorAndSizeSelectionComponent.data}${reviewsComponent.data}`);
     } catch (error) {
       console.error(error);
-      res.end()
+      res.end();
     }
   }
   retrieveBundles();
@@ -33,7 +35,7 @@ app.get('/shoes/:shoeId/colors', (req, res) => {
   .catch(err => {
     console.error(err);
     res.end();
-  })
+  });
 });
 
 app.get('/shoes/:shoeId/sizes', (req, res) => {
@@ -45,7 +47,7 @@ app.get('/shoes/:shoeId/sizes', (req, res) => {
   .catch(err => {
     console.error(err);
     res.end();
-  })
+  });
 });
 
 app.get('/shoes/:shoeId/colors/:colorId/quantities', (req, res) => {
@@ -57,7 +59,7 @@ app.get('/shoes/:shoeId/colors/:colorId/quantities', (req, res) => {
   .catch(err => {
     console.error(err);
     res.end();
-  })
+  });
 });
 
 //product info routes
@@ -70,9 +72,34 @@ app.get('/products/:shoeId/summary', (req, res) => {
   .catch(err => {
     console.error(err);
     res.end();
+  });
+});
+
+//reviews routes
+app.get('/shoes/:shoeId/reviews/:count', (req, res) => {
+  let { shoeId, count } = req.params;
+  axios.get(`${reviewsHost}/shoes/${shoeId}/reviews/${count}`)
+  .then(reviews => {
+    res.send(reviews.data);
   })
-})
+  .catch(err => {
+    console.error(err);
+    res.end();
+  });
+});
+
+app.get('/shoes/:shoeId/rating', (req, res) => {
+  let { shoeId } = req.params;
+  axios.get(`${reviewsHost}/shoes/${shoeId}/rating`)
+  .then(rating => {
+    res.send(rating.data);
+  })
+  .catch(err => {
+    console.error(err);
+    res.end();
+  });
+});
 
 app.listen(PORT, () => {
   console.log(`listening on localhost:${PORT}`);
-})
+});

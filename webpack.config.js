@@ -3,7 +3,8 @@ const path = require('path');
 module.exports = {
   entry: [
     "../somebirdsColorAndSizeSelection/client/index.jsx",
-    "../somebirds-product-accordion/client/index.jsx"
+    "../somebirds-product-accordion/client/index.jsx",
+    "../somebirdsReviews/client/index.jsx"
   ],
   module: {
     rules: [
