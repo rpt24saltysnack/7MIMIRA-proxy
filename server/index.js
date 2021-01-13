@@ -6,7 +6,8 @@ const PORT = 3000;
 
 const colorAndSizeSelectionHost = process.env.DEV_COLOR_HOST || 'http://3.18.69.132:3001';
 const summaryHost = process.env.DEV_SUMMARY_HOST || 'http://54.241.116.3:3002';
-const reviewsHost = process.env.DEV_REVIEWS_HOST || 'http://3.18.69.132:3003';;
+const reviewsHost = process.env.DEV_REVIEWS_HOST || 'http://3.18.69.132:3003';
+const navbarHost = process.env.DEV_NAVBAR_HOST || 'http://3.18.69.132:3003';
 
 app.use(express.static('public'));
 
@@ -16,7 +17,8 @@ app.get('/bundles', (req, res) => {
       let colorAndSizeSelectionComponent = await axios.get(`${colorAndSizeSelectionHost}/bundle.js`);
       let summaryComponent = await axios.get(`${summaryHost}/bundle.js`);
       let reviewsComponent = await axios.get(`${reviewsHost}/bundle.js`);
-      res.send(`${summaryComponent.data}${colorAndSizeSelectionComponent.data}${reviewsComponent.data}`);
+      let navbarComponent = await axios.get(`${navbarHost}/bundle.js`);
+      res.send(`${summaryComponent.data}${colorAndSizeSelectionComponent.data}${reviewsComponent.data}${navbarComponent.data}`);
     } catch (error) {
       console.error(error);
       res.end();
