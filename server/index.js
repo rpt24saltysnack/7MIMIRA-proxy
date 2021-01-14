@@ -7,7 +7,8 @@ const PORT = 3000;
 const colorAndSizeSelectionHost = process.env.DEV_COLOR_HOST || 'http://3.18.69.132:3001';
 const summaryHost = process.env.DEV_SUMMARY_HOST || 'http://54.241.116.3:3002';
 const reviewsHost = process.env.DEV_REVIEWS_HOST || 'http://3.18.69.132:3003';
-const navbarHost = process.env.DEV_NAVBAR_HOST || 'http://3.18.69.132:3003';
+const navbarHost = process.env.DEV_NAVBAR_HOST || 'http://3.18.69.132:3005';
+const imagesHost = process.env.DEV_IMAGES_HOST || 'http://54.241.116.3:3004';
 
 app.use(express.static('public'));
 
@@ -18,7 +19,8 @@ app.get('/bundles', (req, res) => {
       let summaryComponent = await axios.get(`${summaryHost}/bundle.js`);
       let reviewsComponent = await axios.get(`${reviewsHost}/bundle.js`);
       let navbarComponent = await axios.get(`${navbarHost}/bundle.js`);
-      res.send(`${summaryComponent.data}${colorAndSizeSelectionComponent.data}${reviewsComponent.data}${navbarComponent.data}`);
+      let imagesComponent = await axios.get(`${imagesHost}/bundle.js`);
+      res.send(`${summaryComponent.data}${colorAndSizeSelectionComponent.data}${reviewsComponent.data}${imagesComponent.data}${navbarComponent.data}`);
     } catch (error) {
       console.error(error);
       res.end();
@@ -101,6 +103,24 @@ app.get('/shoes/:shoeId/rating', (req, res) => {
     res.end();
   });
 });
+
+// product images routes
+/*
+* VERIFY imageHost variable is correct!!
+*/
+app.get('/products/:shoeId/gallery', (req, res) => {
+  let { shoeId } = req.params;
+  axios.get(`${imagesHost}/products/${shoeId}/gallery`)
+  .then(gallery => {
+    console.log(gallery.data);
+    res.send(gallery.data);
+  })
+  .catch(err => {
+    console.error(err);
+    res.end();
+  });
+});
+
 
 app.listen(PORT, () => {
   console.log(`listening on localhost:${PORT}`);
