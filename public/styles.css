@@ -12,6 +12,7 @@
 .main {
   display: inline-block;
   width: 67%;
+  padding-right: 40px;
   /* background-color: blue; */
 }
 
