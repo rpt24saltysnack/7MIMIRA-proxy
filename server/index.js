@@ -9,6 +9,7 @@ const summaryHost = process.env.DEV_SUMMARY_HOST || 'http://54.241.116.3:3002';
 const reviewsHost = process.env.DEV_REVIEWS_HOST || 'http://3.18.69.132:3003';
 const navbarHost = process.env.DEV_NAVBAR_HOST || 'http://3.18.69.132:3005';
 const imagesHost = process.env.DEV_IMAGES_HOST || 'http://54.241.116.3:3004';
+const footerHost = process.env.DEV_FOOTER_HOST || 'http://3.18.69.132:3006';
 
 app.use(express.static('public'));
 
@@ -20,7 +21,8 @@ app.get('/bundles', (req, res) => {
       let reviewsComponent = await axios.get(`${reviewsHost}/bundle.js`);
       let navbarComponent = await axios.get(`${navbarHost}/bundle.js`);
       let imagesComponent = await axios.get(`${imagesHost}/bundle.js`);
-      res.send(`${summaryComponent.data}${colorAndSizeSelectionComponent.data}${reviewsComponent.data}${imagesComponent.data}${navbarComponent.data}`);
+      let footerComponent = await axios.get(`${footerHost}/bundle.js`);
+      res.send(`${summaryComponent.data}${colorAndSizeSelectionComponent.data}${reviewsComponent.data}${imagesComponent.data}${navbarComponent.data}${footerComponent.data}`);
     } catch (error) {
       console.error(error);
       res.end();
