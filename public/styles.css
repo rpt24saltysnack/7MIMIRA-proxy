@@ -7,8 +7,9 @@
 
 .footer-background {
   background-color: #212a2f;
+  position: absolute;
   width: 100%;
-  width: 100vw;
+  left: 0px;
 }
 
 .final-container {
